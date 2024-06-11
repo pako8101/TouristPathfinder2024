@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "full_name",nullable = false)
-    private String full_name;
+    private String fullName;
     @Column
     private Integer age;
     @Column(nullable = false,unique = true)
@@ -23,7 +23,7 @@ public class User {
     private UserLevel level;
     @Column(nullable = false)
     private String password;
-@ManyToMany
+@ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
 
@@ -50,12 +50,17 @@ public class User {
         return this;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public User setFull_name(String full_name) {
-        this.full_name = full_name;
+    public User setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    public User setAge(Integer age) {
+        this.age = age;
         return this;
     }
 

@@ -2,9 +2,12 @@ package TouristPathfinder2024.web.dto;
 
 import jakarta.validation.constraints.*;
 
+import java.util.List;
+import java.util.logging.Level;
+
 public class UserRegisterDto {
-    @NotEmpty
-    @NotNull
+    @NotBlank
+    @Size(min = 2)
     private String username;
     @NotEmpty
     @Size(min = 5)
@@ -18,7 +21,18 @@ public class UserRegisterDto {
     private String password;
     private String confirmPassword;
 
+    private Level level;
+
     public UserRegisterDto() {
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public UserRegisterDto setLevel(Level level) {
+        this.level = level;
+        return this;
     }
 
     public String getUsername() {
