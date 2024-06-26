@@ -1,12 +1,15 @@
 package TouristPathfinder2024.service;
 
 import TouristPathfinder2024.data.RouteRepository;
+import TouristPathfinder2024.data.UserRepository;
 import TouristPathfinder2024.model.Picture;
 import TouristPathfinder2024.model.Route;
 import TouristPathfinder2024.model.dto.RouteShortInfoDto;
+import TouristPathfinder2024.web.dto.AddRouteDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +17,13 @@ import java.util.Random;
 
 @Service
 public class RouteService {
+    private final UserRepository userRepository;
     private final RouteRepository routeRepository;
     private final Random random;
     private final ModelMapper modelMapper;
 
-    public RouteService(RouteRepository routeRepository) {
+    public RouteService(UserRepository userRepository, RouteRepository routeRepository) {
+        this.userRepository = userRepository;
         this.routeRepository = routeRepository;
         this.modelMapper = new ModelMapper();
         this.random = new Random();
@@ -54,5 +59,13 @@ public class RouteService {
         }
 
         return mapToShortInfo(route.get());
+    }
+
+    public boolean add(AddRouteDto data, MultipartFile gpxFile) {
+
+        Route toInsert = modelMapper.map(data, Route.class);
+
+
+        return  false;
     }
 }
